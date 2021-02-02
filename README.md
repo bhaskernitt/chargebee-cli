@@ -5,9 +5,9 @@ chargebee-cli
 
 Install via homebrew (MAC OS)
 
-Install : brew tap bhaskernitt/brew && brew install bhaskernitt/brew/chargbee-cli
+Install : brew tap bhaskernitt/brew && brew install bhaskernitt/brew/chargebee-cli
 
-Uninstall : brew tap bhaskernitt/brew && brew uninstall bhaskernitt/brew/chargbee-cli 
+Uninstall : brew tap bhaskernitt/brew && brew uninstall bhaskernitt/brew/chargebee-cli 
 ```
 
 ```
