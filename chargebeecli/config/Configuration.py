@@ -1,9 +1,8 @@
 import os
 import shutil
-from configparser import ConfigParser
+from configparser import ConfigParser, NoSectionError
 
-from chargebeecli.constants.error_messages import *
-from chargebeecli.printer.printer import custom_print
+from chargebeecli.config.config_validator import validate_account_api_key
 
 
 class Singleton:
@@ -69,26 +68,17 @@ class Configuration:
     def fetch_section(self, __profile, item_key):
         return self.config.get(__profile, item_key)
 
+    def is_section_exist(self, __profile, item_key):
+        try:
+            return self.config.get(__profile, item_key)
+        except NoSectionError as e:
+            return None
+
     def get_account_api_key(self):
-        if self.config.has_section("active_profile") is not True:
-            custom_print(NO_ACTIVE_PROFILE, err=True)
-            exit()
+        validate_account_api_key(self.config)
         configured_active_profile = self.config.get('active_profile', 'primary')
-
-        if self.config.has_section(configured_active_profile):
-            if self.config.has_section(configured_active_profile):
-                if (self.config.get(configured_active_profile, 'api_key') and self.config.get(configured_active_profile,
-                                                                                              'account')) is not None:
-                    return {'api_key': self.config.get(configured_active_profile, 'api_key')
-                        , 'account': self.config.get(configured_active_profile, 'account')}
-                else:
-                    custom_print(ACCOUNT_API_NOT_SET, err=True)
-
-            else:
-                custom_print(ACCOUNT_API_NOT_SET, err=True)
-
-        else:
-            custom_print(ACCOUNT_API_NOT_SET, err=True)
+        return {'api_key': self.config.get(configured_active_profile, 'api_key')
+            , 'account': self.config.get(configured_active_profile, 'account')}
 
     def add_section(self, section, values):
         self.config.add_section(section)

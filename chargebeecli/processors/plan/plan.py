@@ -4,6 +4,7 @@ from chargebeecli.export.Exporter import Exporter
 from chargebeecli.formater.response_formatter import ResponseFormatter
 from chargebeecli.printer.printer import Printer
 from chargebeecli.processors.processor import Processor
+from chargebeecli.util.printer_util import custom_print
 from chargebeecli.validator.validator import Validator
 
 API_URI = '/api/v2/plans'
@@ -55,3 +56,6 @@ class Plan(Processor, Validator, ResponseFormatter, Exporter, Printer):
 
     def table_to_be_printed(self):
         return self.to_be_formatted()
+
+
+

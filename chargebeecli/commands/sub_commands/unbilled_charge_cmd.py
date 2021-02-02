@@ -2,6 +2,7 @@ import click
 
 from chargebeecli.constants.constants import Formats, Export_Formats
 from chargebeecli.processors.unbilled_chrages.unbilled_charge import UnbilledCharge
+from chargebeecli.util.theme_util import get_active_theme
 
 
 @click.command("unbilled_charge", help='endpoint to perform operation on [unbilled_charge] resource')
@@ -24,4 +25,4 @@ def cmd(ctx, id, operation, columns, format, export_filename, export_format, exp
         .process(None, operation, payload=None, resource_id=id) \
         .format() \
         .export_data() \
-        .print_response()
+        .print_response(get_active_theme())

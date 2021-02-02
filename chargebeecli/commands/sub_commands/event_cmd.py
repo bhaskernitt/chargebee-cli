@@ -2,6 +2,7 @@ import click
 
 from chargebeecli.constants.constants import Formats, Export_Formats
 from chargebeecli.processors.events.events import Event
+from chargebeecli.util.theme_util import get_active_theme
 
 
 @click.command("event", help='endpoint to perform operation on [event] resource')
@@ -24,4 +25,4 @@ def cmd(ctx, id, operation, columns, format, export_filename, export_format, exp
         .process(None, operation, payload=None, resource_id=id) \
         .format() \
         .export_data() \
-        .print_response()
+        .print_response(get_active_theme())

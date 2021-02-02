@@ -28,7 +28,7 @@ def _create_table(__response, __format, __operation, __headers, __resource_type,
     return tables
 
 
-class ResponseFormatter(object):
+class ResponseFormatter:
 
     def to_be_formatted(self):
         raise NotImplementedError("Please Implement this method")

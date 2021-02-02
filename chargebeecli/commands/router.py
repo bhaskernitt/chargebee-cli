@@ -66,7 +66,9 @@ def login(ctx, profile):
     login_processor.process(profile)
 
 
-# plan end
+
+
+# add endline at the end
 @entry_point.resultcallback()
 def process_result(result):
     custom_print("\n.................................end.................................")
@@ -103,4 +105,5 @@ entry_point.add_command(quote_cmd.cmd)
 entry_point.add_command(subscription_cmd.cmd)
 entry_point.add_command(transaction_cmd.cmd)
 entry_point.add_command(unbilled_charge_cmd.cmd)
-entry_point.add_command(theme_cmd.cmd)
+entry_point.add_command(theme_cmd.theme_cmd)
+

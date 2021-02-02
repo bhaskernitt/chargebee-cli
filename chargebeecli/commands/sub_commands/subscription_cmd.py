@@ -3,6 +3,7 @@ import click
 from chargebeecli.constants.constants import Formats, Export_Formats
 from chargebeecli.processors.subs.subscriptions import Subscription
 from chargebeecli.util.multiple_columns import MultipleColumns
+from chargebeecli.util.theme_util import get_active_theme
 
 
 @click.command(name="subs", help='endpoint to perform operation on [subscription] resource')
@@ -29,4 +30,4 @@ def cmd(ctx, id, operation, columns_subs, columns_cus, format, export_filename, 
         .process(None, operation, payload=None, resource_id=id) \
         .format() \
         .export_data() \
-        .print_response()
+        .print_response(get_active_theme())

@@ -2,6 +2,7 @@ import click
 
 from chargebeecli.constants.constants import Formats, Export_Formats
 from chargebeecli.processors.promotional_credits.promotional_credit import PromotionalCredit
+from chargebeecli.util.theme_util import get_active_theme
 
 
 @click.command("promotional_credit", help='endpoint to perform operation on [promotional_credit] resource')
@@ -24,4 +25,4 @@ def cmd(ctx, id, operation, columns, format, export_filename, export_format, exp
         .process(None, operation, payload=None, resource_id=id) \
         .format() \
         .export_data() \
-        .print_response()
+        .print_response(get_active_theme())

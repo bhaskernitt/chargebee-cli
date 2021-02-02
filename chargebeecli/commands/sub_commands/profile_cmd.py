@@ -2,6 +2,7 @@ import click
 
 from chargebeecli.constants.constants import Formats, Export_Formats
 from chargebeecli.processors.profile.profile import Profile
+from chargebeecli.util.theme_util import get_active_theme
 
 
 @click.command("profile", help='manage credentials for local chargebee profiles')
@@ -23,4 +24,4 @@ def cmd(ctx, operation, columns, format, name, export_filename, export_format, e
         .process(None, operation, payload=None, resource_id=name) \
         .format() \
         .export_data() \
-        .print_response()
+        .print_response(get_active_theme())
