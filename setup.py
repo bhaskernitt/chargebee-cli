@@ -21,13 +21,15 @@ install_requires = [
     'tabulate',
     'requests',
     'pandas',
-    'openpyxl'
+    'openpyxl',
+    "setuptools",
+    'wheel'
 ]
 
 setup_options = dict(
     name='chargebee-cli',
     description='cli for chargebee apis',
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     author='Nandkishor bhasker',
     author_email='bhasker.nandkishor@gmail.com',
     version=VERSION,
