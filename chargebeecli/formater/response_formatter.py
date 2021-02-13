@@ -7,12 +7,12 @@ def _create_table(__response, __format, __operation, __headers, __resource_type,
     table = []
     tables = []
     if __operation == __list_key:
-        subscriptions = json.loads(__response.content.decode('utf-8'))[__list_key]
-        for __subscription in subscriptions:
-            __subscription = __subscription[__resource_type]
+        resources = json.loads(__response.content.decode('utf-8'))[__list_key]
+        for __resource in resources:
+            __resource = __resource[__resource_type]
             table = []
             for header in __headers:
-                s = __subscription.get(header, None)
+                s = __resource.get(header, None)
                 table.append(s)
             tables.append(table)
     else:

@@ -4,7 +4,6 @@ from chargebeecli.export.Exporter import Exporter
 from chargebeecli.formater.response_formatter import ResponseFormatter
 from chargebeecli.printer.printer import Printer
 from chargebeecli.processors.processor import Processor
-from chargebeecli.util.printer_util import custom_print
 from chargebeecli.validator.validator import Validator
 
 API_URI = '/api/v2/plans'
