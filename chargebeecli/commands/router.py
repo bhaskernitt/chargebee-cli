@@ -4,6 +4,7 @@ import pyfiglet
 from .sub_commands import profile_cmd, plan_cmd, addon_cmd, coupon_cmd, address_cmd, card_cmd, comment_cmd, \
     coupon_code_cmd, coupon_set_cmd, credit_note_cmd, customer_cmd, event_cmd, gift_cmd, hosted_page_cmd, invoice_cmd, \
     order_cmd, promotional_credit_cmd, quote_cmd, subscription_cmd, transaction_cmd, unbilled_charge_cmd, theme_cmd
+from ..constants.constants import API_KEY_NAME, ACCOUNT_KEY_NAME
 from ..printer.printer import custom_print
 from ..processors.login import login_processor
 from ..processors.profile import profile_configurator
@@ -55,7 +56,7 @@ def configure(ctx):
 @click.option("--api-key", '-ak', type=str, required=True)
 @click.option("--account", '-a', type=str, required=True)
 def configure_profile_cmd(ctx, name, api_key, account):
-    profile_configurator.process(name, {'api_key': api_key, 'account': account})
+    profile_configurator.process(name, {API_KEY_NAME: api_key, ACCOUNT_KEY_NAME: account})
 
 
 # login command

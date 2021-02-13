@@ -3,7 +3,7 @@ import json
 from requests import Response
 
 from chargebeecli.config.Configuration import Configuration
-from chargebeecli.constants.constants import ApiOperation
+from chargebeecli.constants.constants import ApiOperation, ACTIVE_THEME_SECTION_NAME
 from chargebeecli.printer.printer import Printer,  custom_print
 from chargebeecli.processors.processor import Processor
 from chargebeecli.processors.themes.available_themes import available_themes, get_theme
@@ -33,7 +33,7 @@ class Theme(Processor, Validator, Printer):
             custom_print("Invalid theme: " + resource_id, err=True)
             exit()
         configuration = Configuration.Instance()
-        configuration.update_section("active_theme", {'theme': resource_id})
+        configuration.update_section(ACTIVE_THEME_SECTION_NAME, {'theme': resource_id})
         custom_print(resource_id + " theme is set")
         exit()
 

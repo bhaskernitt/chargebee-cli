@@ -32,7 +32,6 @@ def custom_print(message, err=False):
 
 
 def custom_print_table(tables, _headers, theme=None):
-    #default_theme = get_theme('basic')
     new_h = []
     for _h in _headers:
         new_h.append(colors[theme["header-color"]] % _h)

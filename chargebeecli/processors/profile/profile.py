@@ -3,7 +3,8 @@ import json
 from requests import Response
 
 from chargebeecli.config.Configuration import Configuration
-from chargebeecli.constants.constants import Formats
+from chargebeecli.constants.constants import Formats, ACTIVE_THEME_SECTION_NAME, ACTIVE_PROFILE_SECTION_NAME, \
+    API_KEY_NAME, ACCOUNT_KEY_NAME
 from chargebeecli.export.Exporter import Exporter
 from chargebeecli.formater.response_formatter import ResponseFormatter
 from chargebeecli.printer.printer import Printer
@@ -28,7 +29,7 @@ class Profile(Processor, Validator, ResponseFormatter, Exporter, Printer):
         return self
 
     def get_api_header(self):
-        return ["name", "api_key", "account"]
+        return ["name", API_KEY_NAME, ACCOUNT_KEY_NAME]
 
     def format(self):
         if self.to_be_formatted():
@@ -43,7 +44,7 @@ class Profile(Processor, Validator, ResponseFormatter, Exporter, Printer):
         response = Response()
         response.status_code = 200
         if resource_id is None:
-            __active_profile = Configuration.Instance().fetch_section('active_profile', 'primary')
+            __active_profile = Configuration.Instance().fetch_section(ACTIVE_PROFILE_SECTION_NAME, 'primary')
         else:
             __active_profile = resource_id
             if __active_profile not in Configuration.Instance().fetch_available_sections():
@@ -52,8 +53,8 @@ class Profile(Processor, Validator, ResponseFormatter, Exporter, Printer):
         if __active_profile is None:
             return response
         res = {"profile": {"name": __active_profile,
-                           "api_key": Configuration.Instance().fetch_section(__active_profile, "api_key"),
-                           "account": Configuration.Instance().fetch_section(__active_profile, "account")}}
+                           API_KEY_NAME: Configuration.Instance().fetch_section(__active_profile, API_KEY_NAME),
+                           ACCOUNT_KEY_NAME: Configuration.Instance().fetch_section(__active_profile, ACCOUNT_KEY_NAME)}}
         response._content = json.dumps(res).encode('utf-8')
         return response
 
@@ -66,10 +67,10 @@ class Profile(Processor, Validator, ResponseFormatter, Exporter, Printer):
 
         res = []
         for __profile in __sections:
-
-            if __profile == 'active_profile': continue
-            t = {"name": __profile, "api_key": Configuration.Instance().fetch_section(__profile, "api_key"),
-                 "account": Configuration.Instance().fetch_section(__profile, "account")}
+            if __profile == ACTIVE_PROFILE_SECTION_NAME or __profile == ACTIVE_THEME_SECTION_NAME:
+                continue
+            t = {"name": __profile, API_KEY_NAME: Configuration.Instance().fetch_section(__profile, API_KEY_NAME),
+                 ACCOUNT_KEY_NAME: Configuration.Instance().fetch_section(__profile, ACCOUNT_KEY_NAME)}
             t1 = {"profile": t}
             res.append(t1)
 

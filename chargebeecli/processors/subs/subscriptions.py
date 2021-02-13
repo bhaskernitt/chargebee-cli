@@ -33,7 +33,7 @@ class Subscription(Processor, Validator, ResponseFormatter, Exporter, Printer):
         self.headers_customer = self.__subscriptionCustomer.get_api_header()
 
     def validate_param(self):
-        self.headers = super().validate_param(self.__columns_customer, self.headers)
+        self.headers = super().validate_param(self.__columns, self.headers)
         self.headers_customer = super().validate_param(self.__columns_customer, self.headers_customer)
         return self
 
@@ -52,7 +52,8 @@ class Subscription(Processor, Validator, ResponseFormatter, Exporter, Printer):
         return self
 
     def format_customer(self):
-        self.tables_customer = super().format(self.response, self.response_format, self.operation, self.headers_customer, 'customer', 'list')
+        self.tables_customer = super().format(self.response, self.response_format, self.operation,
+                                              self.headers_customer, 'customer', 'list')
         return self
 
     def process(self, ctx, operation, payload, resource_id):
@@ -73,12 +74,13 @@ class Subscription(Processor, Validator, ResponseFormatter, Exporter, Printer):
     def table_to_be_printed(self):
         return self.to_be_formatted()
 
-    def print_response(self, before=None, after=None):
+    def print_response(self, theme, before=None, after=None):
         if self.table_to_be_printed():
-            custom_print_table(self.tables, self.headers)
+            custom_print_table(self.tables, self.headers, theme)
             custom_print("---------------------------")
             custom_print("........customer.............\n")
-            custom_print("---------------------------")
-            custom_print_table(self.tables_customer, self.headers_customer)
+            custom_print("           \|/               ")
+            custom_print("           /|\               ")
+            custom_print_table(self.tables_customer, self.headers_customer, theme)
         else:
             custom_print(self.response.content.decode('utf-8'))

@@ -3,6 +3,7 @@ import shutil
 from configparser import ConfigParser, NoSectionError
 
 from chargebeecli.config.config_validator import validate_account_api_key
+from chargebeecli.constants.constants import ACTIVE_PROFILE_SECTION_NAME, API_KEY_NAME, ACCOUNT_KEY_NAME
 
 
 class Singleton:
@@ -76,9 +77,9 @@ class Configuration:
 
     def get_account_api_key(self):
         validate_account_api_key(self.config)
-        configured_active_profile = self.config.get('active_profile', 'primary')
-        return {'api_key': self.config.get(configured_active_profile, 'api_key')
-            , 'account': self.config.get(configured_active_profile, 'account')}
+        configured_active_profile = self.config.get(ACTIVE_PROFILE_SECTION_NAME, 'primary')
+        return {API_KEY_NAME: self.config.get(configured_active_profile, API_KEY_NAME)
+            , ACCOUNT_KEY_NAME: self.config.get(configured_active_profile, ACCOUNT_KEY_NAME)}
 
     def add_section(self, section, values):
         self.config.add_section(section)

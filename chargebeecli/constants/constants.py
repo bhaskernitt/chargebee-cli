@@ -38,3 +38,9 @@ ERROR_HEADER = ["message",
                 "error_msg",
                 "http_status_code"
                 ]
+
+
+ACTIVE_THEME_SECTION_NAME = 'active_theme'
+ACTIVE_PROFILE_SECTION_NAME = 'active_profile'
+API_KEY_NAME = "api_key"
+ACCOUNT_KEY_NAME = "account"
